@@ -5,11 +5,9 @@ describe("Log in page component", () => {
     beforeEach(() => {
         cy.visit("https://www.saucedemo.com/v1/index.html");
     });
-    it.only("should log in when input correct username and password", () => {
+    it("should log in when input correct username and password", () => {
         const login = new loginPage();
-        login.elements.inputUser().type("standard_user");
-        login.elements.inputPassword().type("secret_sauce");
-        login.elements.loginButton().click();
+        login.loginSuccess();
         cy.get(".product_label").should("be.visible");
         cy.url().should("eq", "https://www.saucedemo.com/v1/inventory.html");
     });
