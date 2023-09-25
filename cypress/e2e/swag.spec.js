@@ -1,19 +1,20 @@
 /// <reference types="cypress" />
+import { loginPage } from "../pageObject/loginPage";
 
 describe("Log in page component", () => {
     beforeEach(() => {
         cy.visit("https://www.saucedemo.com/v1/index.html");
     });
-    it("should log in when input correct username and password", () => {
-        const inputUser = "input#user-name.form_input";
-        const inputPassword = "input#password.form_input";
-        cy.get(inputUser).type("standard_user");
-        cy.get(inputPassword).type("secret_sauce");
-        cy.get("#login-button").click();
+    it.only("should log in when input correct username and password", () => {
+        const login = new loginPage();
+        login.elements.inputUser().type("standard_user");
+        login.elements.inputPassword().type("secret_sauce");
+        login.elements.loginButton().click();
         cy.get(".product_label").should("be.visible");
         cy.url().should("eq", "https://www.saucedemo.com/v1/inventory.html");
     });
 
+    //To-do: Assert text value of the error message
     it("should not log in when input incorrect username", () => {
         cy.get("input#user-name.form_input").type("standard_userrry");
         cy.get("input#password.form_input").type("secret_sauce");
