@@ -5,10 +5,25 @@ export class loginPage {
         loginButton: () => cy.get("#login-button"),
     };
 
-    loginSuccess(){
-        this.elements.inputUser().type("standard_user");
-        this.elements.inputPassword().type("secret_sauce");
+    username = {
+        success: "standard_user",
+        fail: "standard_userrry"
+    }
+
+    password = {
+        success: "secret_sauce",
+        fail: "secret_sauceses"
+    }
+
+    loginSuccess() {
+        this.elements.inputUser().type(this.username.success);
+        this.elements.inputPassword().type(this.password.success);
+        this.elements.loginButton().click();
+    };
+
+    loginFail() {
+        this.elements.inputUser().type(this.username.fail);
+        this.elements.inputPassword().type(this.password.fail);
         this.elements.loginButton().click();
     }
 }
-
